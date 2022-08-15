@@ -1,0 +1,5 @@
+- name: install docker on centos
+  become: yes
+  become_method: sudo
+  shell:
+    cmd: "curl -sSL https://get.daocloud.io/docker | sh"

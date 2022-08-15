@@ -1,0 +1,13 @@
+@startuml
+node UE渲染客户端
+node 信令服务器
+node Web服务器
+actor 用户1
+actor 用户2
+
+UE渲染客户端 -- 信令服务器
+用户1 -- Web服务器
+用户2 -- Web服务器
+用户1 -- 信令服务器
+用户2 -- 信令服务器
+@enduml

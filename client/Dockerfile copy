@@ -1,0 +1,19 @@
+FROM adamrehn/ue4-runtime:latest
+
+ARG PROJECT_NAME
+
+USER root
+
+COPY . /home/ue4/project/dist
+
+EXPOSE 9999/udp
+
+RUN echo "#!/bin/sh\n /home/ue4/project/dist/Linux/${PROJECT_NAME}.sh -AudioMixer -RenderOffscreen -PixelStreamingIP=localhost -PixelStreamingPort=8888" > ./run.sh
+
+RUN chmod 777 ./run.sh
+
+RUN chown -R ue4 /home/ue4/project/dist
+
+USER ue4
+
+ENTRYPOINT ["./run.sh"]

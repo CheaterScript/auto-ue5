@@ -1,0 +1,4 @@
+packer:
+  hosts:
+    packer01:
+      ansible_host: 10.137.42.47
