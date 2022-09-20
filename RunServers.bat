@@ -1,0 +1,2 @@
+start /b node %~dp0/Samples/PixelStreaming/WebServers/SignallingWebServer/cirrus.js --configFile %~dp0/Samples/PixelStreaming/Config/node1-config.json
+start /b node %~dp0/Samples/PixelStreaming/WebServers/SignallingWebServer/cirrus.js --configFile %~dp0/Samples/PixelStreaming/Config/node2-config.json
