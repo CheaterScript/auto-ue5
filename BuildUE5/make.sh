@@ -179,3 +179,20 @@ call "D:/Program Files/Epic Games/UE_5.0/Engine/Build/BatchFiles/RunUAT.bat" -Sc
 md "%OUTPUT_PATH%/%SVN_REVISION%/Windows/PXnhParkDemo/Config/"
 
 copy "%WORKSPACE%\XLHSSTZL\Config\ServerHost.json" "%OUTPUT_PATH%/%SVN_REVISION%/Windows/PXnhParkDemo/Config/"
+
+del /F /S /Q "%WORKSPACE%/XLHSSTZL/Binaries"
+
+@call "D:/Program Files (x86)/Epic Games/UE_5.0/Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.exe"  -projectfiles -project="%WORKSPACE%/XLHSSTZL/PXnhParkDemo.uproject" -game -rocket -progress -log="%WORKSPACE%/XLHSSTZL/Saved/Logs/UnrealVersionSelector-2022.08.15-15.01.07.log"
+
+@call "D:/Program Files (x86)/Epic Games/UE_5.0/Engine/Build/BatchFiles/Build.bat" PXnhParkDemoEditor Win64 Development "%WORKSPACE%/XLHSSTZL/PXnhParkDemo.uproject"
+
+@call "D:/Program Files (x86)/Epic Games/UE_5.0/Engine/Build/BatchFiles/RunUAT.bat" -ScriptsForProject="%WORKSPACE%/XLHSSTZL/PXnhParkDemo.uproject" Turnkey -command=VerifySdk -platform=Win64 -UpdateIfNeeded -EditorIO -EditorIOPort=58303  -project="%WORKSPACE%/XLHSSTZL/PXnhParkDemo.uproject" BuildCookRun -nop4 -utf8output -nocompileeditor -skipbuildeditor -cook  -project="%WORKSPACE%/XLHSSTZL/PXnhParkDemo.uproject" -target=PXnhParkDemo  -unrealexe="D:/Program Files (x86)/Epic Games/UE_5.0/Engine/Binaries/Win64/UnrealEditor-Cmd.exe" -platform=Win64 -ddc=InstalledDerivedDataBackendGraph -installed -stage -archive -package -build -compressed -iostore -pak -prereqs -archivedirectory="%OUTPUT_PATH%/%SVN_REVISION%" -clientconfig=%BUILD_ENVIRONMENT% -nodebuginfo -noturnkeyvariables
+
+IF %ERRORLEVEL% NEQ 0 goto error
+
+@md "%OUTPUT_PATH%/%SVN_REVISION%/Windows/PXnhParkDemo/Config/"
+
+@copy "%WORKSPACE%\XLHSSTZL\Config\ServerHost.json" "%OUTPUT_PATH%/%SVN_REVISION%/Windows/PXnhParkDemo/Config/"
+
+:error
+set ERRORLEVEL=%ERRORLEVEL%
